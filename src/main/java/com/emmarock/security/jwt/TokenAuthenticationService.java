@@ -1,13 +1,10 @@
 package com.emmarock.security.jwt;
 
-import com.emmarock.model.SecurityUser;
 import com.emmarock.model.TokenResponse;
 import com.emmarock.model.UsersDetails;
-import com.emmarock.service.SecurityUserDetails;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +48,7 @@ public class TokenAuthenticationService {
         tokenResponse.setAccessToken(token);
         tokenResponse.setJti(uuid.toString());
         tokenResponse.setScope("profile");
+        tokenResponse.setRequestorId(UUID.randomUUID().toString());
         tokenResponse.setTokenType(tokenPrefix);
         return tokenResponse;
     }
