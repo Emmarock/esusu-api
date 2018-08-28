@@ -56,12 +56,12 @@ public class TokenAuthenticationService {
     }
 
     public Authentication getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(headerString).replaceAll("Bearer ","");
+        String token = request.getHeader(headerString);
         if (token != null) {
             // parse the token.
             String username = Jwts.parser()
                     .setSigningKey(secret)
-                    .parseClaimsJws(token)
+                    .parseClaimsJws(token.replaceAll("Bearer ",""))
                     .getBody()
                     .getSubject();
             if (username != null) // we managed to retrieve a user
