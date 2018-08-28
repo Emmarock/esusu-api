@@ -56,5 +56,6 @@ fabric.properties
 .idea/inspectionProfiles/
 target/generated-sources/
 target/generated-test-sources/
-/.idea/
-/target/
+/.idea/libraries
+.idea
+target/
