@@ -2,10 +2,9 @@ package com.emmarock;
 
 import static org.junit.Assert.assertTrue;
 
-import com.emmarock.model.UsersDetails;
+import com.emmarock.model.Contributor;
 import com.emmarock.security.jwt.TokenAuthenticationService;
 import org.junit.Test;
-import org.springframework.security.core.userdetails.User;
 
 /**
  * Unit test for simple App.
@@ -24,13 +23,13 @@ public class AppTest
     @Test
     public void generateToken(){
         TokenAuthenticationService tokenAuthenticationService = new TokenAuthenticationService();
-        UsersDetails usersDetails = new UsersDetails();
-                usersDetails.setUsername("Babajide");
-                usersDetails.setEmail("apatababajide@gmail.com");
-                usersDetails.setBankAccountName("Apata Babajide Emmanuel");
-        usersDetails.setBirthday("19/04/1989");
-        usersDetails.setCity("Lagos");
-        usersDetails.setGender("Male");
-        System.out.println(tokenAuthenticationService.generateToken(usersDetails));
+        Contributor contributor = new Contributor();
+                contributor.setUsername("Babajide");
+                contributor.setEmail("apatababajide@gmail.com");
+                contributor.setBankAccountName("Apata Babajide Emmanuel");
+        contributor.setBirthday("19/04/1989");
+        contributor.setCity("Lagos");
+        contributor.setGender("Male");
+        System.out.println(tokenAuthenticationService.generateToken(contributor));
     }
 }

@@ -1,7 +1,7 @@
 package com.emmarock.security.jwt;
 
+import com.emmarock.model.Contributor;
 import com.emmarock.model.LoginRequest;
-import com.emmarock.model.UsersDetails;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,7 +40,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication)
             throws IOException, ServletException {
-        UsersDetails name = (UsersDetails) authentication.getPrincipal();
+        Contributor name = (Contributor) authentication.getPrincipal();
         tokenAuthenticationService.addAuthentication(response, name);
     }
 

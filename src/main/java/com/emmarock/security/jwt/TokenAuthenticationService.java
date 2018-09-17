@@ -1,7 +1,7 @@
 package com.emmarock.security.jwt;
 
+import com.emmarock.model.Contributor;
 import com.emmarock.model.TokenResponse;
-import com.emmarock.model.UsersDetails;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.Authentication;
@@ -22,13 +22,13 @@ public class TokenAuthenticationService {
     private String tokenPrefix = "Bearer";
     private String headerString = "Authorization";
     String aud = "esusu";
-    public void addAuthentication(HttpServletResponse response, UsersDetails username) {
+    public void addAuthentication(HttpServletResponse response, Contributor username) {
         // We generate a token now.
         String JWT = generateToken(username).getAccessToken();
         response.addHeader(headerString, tokenPrefix + " " + JWT);
     }
 
-    public TokenResponse generateToken(UsersDetails username) {
+    public TokenResponse generateToken(Contributor username) {
         long expirationTime = 1000 * 60 * 60 * 24;
         UUID uuid =  UUID.randomUUID();
         TokenResponse tokenResponse = new TokenResponse();
