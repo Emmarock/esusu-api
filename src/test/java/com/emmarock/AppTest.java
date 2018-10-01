@@ -6,6 +6,8 @@ import com.emmarock.model.Contributor;
 import com.emmarock.security.jwt.TokenAuthenticationService;
 import org.junit.Test;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Unit test for simple App.
  */
@@ -19,10 +21,10 @@ public class AppTest
     {
         assertTrue( true );
     }
-
+    TokenAuthenticationService tokenAuthenticationService = new TokenAuthenticationService();
     @Test
     public void generateToken(){
-        TokenAuthenticationService tokenAuthenticationService = new TokenAuthenticationService();
+
         Contributor contributor = new Contributor();
                 contributor.setUsername("Babajide");
                 contributor.setEmail("apatababajide@gmail.com");

@@ -17,13 +17,12 @@ import org.springframework.security.web.session.SessionManagementFilter;
 /**
  * Created by babajide.apata on 1/31/2017.
  */
-@EnableWebSecurity
+
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	CorsFilter corsFilter() {
-		CorsFilter filter = new CorsFilter();
-		return filter;
+		return new CorsFilter();
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -32,7 +31,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterBefore(corsFilter(), SessionManagementFilter.class)
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST,"/api/v1/oauth/token").permitAll()
-				.antMatchers(HttpMethod.GET, "/home").permitAll()
+				.antMatchers(HttpMethod.GET, "/index").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				// We filter the api/login requests

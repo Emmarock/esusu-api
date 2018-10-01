@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AccessControlInterceptor extends HandlerInterceptorAdapter {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
          try{
-             HandlerMethod method = (HandlerMethod) handler;
              response.setHeader("Access-Control-Allow-Origin","*");
          }catch (Exception ex){
             return false;

@@ -21,7 +21,7 @@ public class TokenAuthenticationService {
     private String secret = "esusu";
     private String tokenPrefix = "Bearer";
     private String headerString = "Authorization";
-    String aud = "esusu";
+
     public void addAuthentication(HttpServletResponse response, Contributor username) {
         // We generate a token now.
         String JWT = generateToken(username).getAccessToken();
@@ -34,6 +34,7 @@ public class TokenAuthenticationService {
         TokenResponse tokenResponse = new TokenResponse();
         Date issueAt = new Date(System.currentTimeMillis() );
         Date expires = new Date(System.currentTimeMillis() + expirationTime);
+        String aud = "esusu";
         String token = Jwts.builder()
                  .claim("User", username)
                     .setSubject(username.getUsername())

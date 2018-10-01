@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 /**
  * Created by Babajide.Apata on 02/02/2017.
@@ -63,8 +64,7 @@ public class ApiAdvice {
                     }
                 }
             }
-
-            if (e.getCause() instanceof JsonParseException) {
+            else if (e.getCause() instanceof JsonParseException) {
                 String[] arr = message.split("at");
                 if (arr.length > 0) {
                     String temp = arr[0];
@@ -83,8 +83,6 @@ public class ApiAdvice {
         Response response = new Response();
         response.setCode("500");
         response.setDescription(e.getLocalizedMessage());
-        logger.error(e.toString());
-        e.printStackTrace();
         return response;
     }
 

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Created by babajide.apata on 3/3/2017.
+ * Created by Babajide.Apata on 3/3/2017.
  */
 @ResponseStatus(HttpStatus.BAD_GATEWAY)
 public class ServerException extends RuntimeException{

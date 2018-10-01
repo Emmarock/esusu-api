@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * @author Adesegun.Adeyemo
+ * @author Babajide.Apata
  */
 @ResponseStatus(HttpStatus.CONFLICT)
 public class DuplicateException extends RuntimeException {

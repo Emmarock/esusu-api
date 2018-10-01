@@ -6,6 +6,8 @@ import com.emmarock.model.NotificationTypes;
 import com.emmarock.repository.ContributionRepository;
 import com.emmarock.service.ContributionService;
 import com.emmarock.service.NotificationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +22,7 @@ public class ContributionController {
     private final ContributionRepository contributionRepository;
     private final ContributionService contributionService;
     private final NotificationService notificationService;
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     public ContributionController(ContributionRepository contributionRepository, ContributionService contributionService, NotificationService notificationService) {
         this.contributionRepository = contributionRepository;
@@ -34,6 +37,7 @@ public class ContributionController {
         if (!contributor.getNotificationMode().equals("TEST")){
             String message =String.format("Your account %s has been credited with %s on %s by %s ",contributor.getPhoneNumber(),
                     contribution.getAmount(), contribution.getDate(), contributor.getUsername());
+            logger.info(message);
             notificationService.notifyUser(contributor.getPhoneNumber(),message, NotificationTypes.CREDIT.toString());
         }
         return contributionService.credit(contribution);
@@ -46,6 +50,7 @@ public class ContributionController {
         if (!contributor.getNotificationMode().equals("TEST")){
             String message =String.format("Your account %s has been debited with %s on %s by %s ",contributor.getPhoneNumber(),
                     contribution.getAmount(), contribution.getDate(),contributor.getUsername());
+            logger.info(message);
             notificationService.notifyUser(contributor.getPhoneNumber(),message, NotificationTypes.CREDIT.toString());
         }
         return contributionService.debit(contribution);
@@ -56,8 +61,11 @@ public class ContributionController {
         Contribution contribution1 = contributionRepository.findContributionsById(contributorId);
         if (contribution1!=null){
             return contributionRepository.save(contribution);
+        }else {
+            String message = String.format("Contribution with id %s does not ", contributorId);
+            logger.info(message);
+            throw new InvalidObjectException(message);
         }
-        throw new InvalidObjectException("The contributionId: "+contributorId+" does not exist");
     }
 
     @GetMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
