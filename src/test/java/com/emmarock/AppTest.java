@@ -32,6 +32,6 @@ public class AppTest
         contributor.setBirthday("19/04/1989");
         contributor.setCity("Lagos");
         contributor.setGender("Male");
-        System.out.println(tokenAuthenticationService.generateToken(contributor));
+        //System.out.println(tokenAuthenticationService.generateToken(contributor).getAccessToken());
     }
 }

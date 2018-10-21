@@ -1,6 +1,7 @@
 package com.emmarock.model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 /**
  * Created by babajide.apata on 2/14/2017.
@@ -8,7 +9,7 @@ import javax.persistence.*;
 
 public class Notifications {
     @Id
-    private Long id;
+    private String id;
     private String fromUser;
     private String toUser;
     private String content;
@@ -40,6 +41,8 @@ public class Notifications {
     }
 
     public Notifications() {
+        UUID uuid = UUID.randomUUID();
+        id=uuid.toString();
     }
 
     public String getNotificationStatus() {
@@ -58,11 +61,11 @@ public class Notifications {
         this.notificationType = notificationType;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -99,7 +102,7 @@ public class Notifications {
     }
 
     public static final class Builder {
-        private Long id;
+        private String id;
         private String fromUser;
         private String toUser;
         private String content;
@@ -109,7 +112,7 @@ public class Notifications {
         public Builder() {
         }
 
-        public Builder notificationId(Long id) {
+        public Builder notificationId(String id) {
             this.id = id;
             return this;
         }

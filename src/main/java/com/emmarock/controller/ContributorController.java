@@ -28,11 +28,12 @@ public class ContributorController {
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Contributor createContributor(@RequestBody Contributor contributor) throws Exception {
+        System.out.println(contributor.toString());
         if (contributorRepository.findOne(contributor.getId()) !=null){
             throw new DuplicateException("Possible duplicate registration, user already exist");
         }
         contributor.setBalance(BigInteger.ZERO);
-        if (!contributor.getNotificationMode().equals("TEST")){
+        if (!contributor.getNotificationMode().equalsIgnoreCase("TEST")){
             String message =String.format("Welcome to Esusu, your account number is %s ",contributor.getPhoneNumber());
             notificationService.notifyUser(contributor.getPhoneNumber(),message, NotificationTypes.WELCOME.toString());
         }
@@ -52,7 +53,7 @@ public class ContributorController {
         return contributorRepository.findAll();
     }
 
-    @GetMapping(value = "/{contributorId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{contributorId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Contributor getContributor(@PathVariable("contributorId") String contributorId){
         Contributor contributor  =contributorRepository.findOne(contributorId);
         if (contributor==null){
